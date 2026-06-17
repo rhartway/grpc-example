@@ -1,0 +1,23 @@
+[package]
+name = "calculator"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+tonic = "0.11"
+tokio = { version = "1", features = ["full"] }
+prost = "0.12"
+tonic-reflection = "0.11"
+tonic-web = "0.11"
+tower-http = { version = 0.4, features = ["cors"] }
+
+[build-dependencies]
+tonic-build = "0.11"
+
+[[bin]]
+name = "server"
+path = "src/main.rs"
+
+[[bin]]
+name = "client"
+path = "src/client.rs"
