@@ -2,16 +2,35 @@ syntax = "proto3";
 
 package calculator;
 
+/**
+ * Defines a calculator service with two RPC methods: Add and Divide. 
+ * Each method takes a CalculationRequest message and returns a CalculationResponse message.
+ *
+ */
 service Calculator {
     rpc Add(CalculationRequest) returns (CalculationResponse);
     rpc Divide(CalculationRequest) returns (CalculationResponse);
 }
 
+/**
+ * A request for a calculation.
+ * Each service will expect two numbers to be provided in the request, a and b.
+ * Depending on the service, the two numbers will be added or divided and the result will be returned 
+ * in a CalculationResponse message.
+ * 
+ * The numbers 1 and 2 are are sequence numbers for the fields in the message. 
+ * They are used to identify the fields in the message when it is serialized and deserialized.
+ * They are not numbers with value
+ */
 message CalculationRequest {
     int64 a = 1;
     int64 b = 2;
 }
 
+/**
+ * A response for a calculation.
+ * The result of the calculation will be returned in this message.
+ */
 message CalculationResponse { int64 result = 1; }
 
 service Admin {

@@ -3,14 +3,17 @@ name = "calculator"
 version = "0.1.0"
 edition = "2024"
 
+# and tower-http is used for CORS handling.
 [dependencies]
 tonic = "0.11"
-tokio = { version = "1", features = ["full"] }
-prost = "0.12"
-tonic-reflection = "0.11"
-tonic-web = "0.11"
-tower-http = { version = 0.4, features = ["cors"] }
+tokio = { version = "1", features = ["full"] } # tonic is built on top of the tokio stack.
+prost = "0.12" # prost to serialize and deserialize into protobuf for protocol buffer support, 
+tonic-reflection = "0.11" # tonic-reflection for gRPC reflection.
+tonic-web = "0.11" # tonic-web is included to enable gRPC-Web support, there are workarounds to use without envoy
+tower-http = { version = "0.4", features = ["cors"] } # tower-http is used for CORS handling, which is necessary for gRPC-Web support when not using a proxy like Envoy.
 
+# defines dependencies for any build scripts
+# we are defining a build script to compile protobuf whenever the project is built
 [build-dependencies]
 tonic-build = "0.11"
 
